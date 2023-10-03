@@ -9,16 +9,20 @@ function VendorEdit() {
   const navigate = useNavigate();
   const [data, setData] = useState();
 
-  const getDetails = async () => {
-    let result = await fetch(`http://localhost:5000/details/${params.id}`);
-    result = await result.json();
-    // console.log("result", result);
-    setData(result);
-  };
-
   useEffect(() => {
+    const getDetails = async () => {
+      try {
+        let result = await fetch(`http://localhost:5000/details/${params.id}`);
+        result = await result.json();
+        // console.log("result", result);
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching details:", error);
+      }
+    };
+
     getDetails();
-  }, [getDetails]);
+  }, [[params.id, setData]]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
