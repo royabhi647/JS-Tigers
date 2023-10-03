@@ -15,7 +15,7 @@ function Pagination({ allUsersDetails }) {
     setTimeout(() => {
       dispatch(userPerPageDetails(limitedDataPerPage));
     }, 0);
-  }, [currentPage, limitedDataPerPage]);
+  }, [currentPage, limitedDataPerPage, dispatch]);
 
   return (
     <div className="pagination-container">

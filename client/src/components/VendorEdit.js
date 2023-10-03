@@ -11,7 +11,7 @@ function VendorEdit() {
 
   useEffect(() => {
     getDetails();
-  }, []);
+  }, [getDetails]);
 
   const getDetails = async () => {
     let result = await fetch(`http://localhost:5000/details/${params.id}`);
