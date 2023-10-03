@@ -3,6 +3,8 @@ const cors = require("cors");
 require("./db/db");
 const User = require("./models/Vendor");
 
+const path = require("path");
+
 const app = express();
 
 app.use(express.json());
@@ -52,6 +54,12 @@ app.put("/update/:id", async (req, res) => {
     }
   );
   res.send(result);
+});
+
+// static files
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 app.listen(5000, () => {
