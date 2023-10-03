@@ -21,8 +21,10 @@ function VendorEdit() {
       }
     };
 
+    const id = params.id;
+
     getDetails();
-  }, [[params.id, setData]]);
+  }, [id, setData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
