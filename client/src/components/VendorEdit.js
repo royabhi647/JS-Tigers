@@ -13,14 +13,14 @@ function VendorEdit() {
   //   getDetails();
   // }, []);
 
-  getDetails();
-
   const getDetails = async () => {
     let result = await fetch(`http://localhost:5000/details/${params.id}`);
     result = await result.json();
     // console.log("result", result);
     setData(result);
   };
+
+  getDetails();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
