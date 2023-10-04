@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import "./styles.css";
@@ -18,7 +18,9 @@ function VendorEdit() {
     setData(result);
   };
 
-  getDetails();
+  useEffect(() => {
+    getDetails();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
