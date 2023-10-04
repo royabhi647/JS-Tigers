@@ -18,7 +18,7 @@ function VendorList() {
     const fetchData = await fetch("http://localhost:5000/details");
     let result = await fetchData.json();
     console.log("allData", result);
-    setUserDetails(result);
+    setUserDetails(result.length > 0 ? result : "");
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function VendorList() {
   }, []);
 
   useEffect(() => {
-    const limitedDataPerPage = userDetails.slice(startIndex, endIndex);
+    const limitedDataPerPage = userDetails?.slice(startIndex, endIndex);
     setPerPageData(limitedDataPerPage);
   }, [startIndex, endIndex, userDetails]);
 
