@@ -9,10 +9,6 @@ function VendorList() {
   const [userDetails, setUserDetails] = useState([]);
   // console.log("userDetails", userDetails);
 
-  useEffect(() => {
-    getDetails();
-  }, []);
-
   const getDetails = async () => {
     const fetchData = await fetch(
       "https://vendor-management-c26x.onrender.com/details"
@@ -21,6 +17,8 @@ function VendorList() {
     // console.log("fetchData", result);
     setUserDetails(result);
   };
+
+  getDetails();
 
   const handleDelete = async (id) => {
     // console.log("Delete", id);
