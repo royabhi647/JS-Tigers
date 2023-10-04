@@ -1,33 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Pagination from "./Pagination";
 import "./styles.css";
 
 function VendorList() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPageData, setPerPageData] = useState([]);
+  console.log("perPageData", perPageData);
+  const itemsPerPage = 8;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
   const [userDetails, setUserDetails] = useState([]);
   // console.log("userDetails", userDetails);
 
   const getDetails = async () => {
-    const fetchData = await fetch(
-      "https://vendor-management-c26x.onrender.com/details"
-    );
+    const fetchData = await fetch("http://localhost:5000/details");
     let result = await fetchData.json();
-    // console.log("fetchData", result);
+    console.log("allData", result);
     setUserDetails(result);
   };
 
-  getDetails();
+  useEffect(() => {
+    getDetails();
+  }, []);
+
+  useEffect(() => {
+    const limitedDataPerPage = userDetails.slice(startIndex, endIndex);
+    setPerPageData(limitedDataPerPage);
+  }, [startIndex, endIndex, userDetails]);
 
   const handleDelete = async (id) => {
     // console.log("Delete", id);
-    let deleteData = await fetch(
-      `https://vendor-management-c26x.onrender.com/delete/${id}`,
-      {
-        method: "Delete",
-      }
-    );
+    let deleteData = await fetch(`http://localhost:5000/delete/${id}`, {
+      method: "Delete",
+    });
 
     deleteData = await deleteData.json();
     // console.log("deleteData", deleteData);
@@ -36,9 +43,6 @@ function VendorList() {
       getDetails();
     }
   };
-
-  const perPageData = useSelector((state) => state.pageLimitedData.perPageData);
-  console.log("perPageData", perPageData);
 
   return (
     <>
@@ -93,7 +97,27 @@ function VendorList() {
           </h1>
         )}
       </div>
-      <Pagination allUsersDetails={userDetails} />
+      {/* <Pagination allUsersDetails={userDetails} /> */}
+      <div className="pagination-container">
+        <p
+          className="pagination-item"
+          onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+        >
+          Prev
+        </p>
+        <p
+          className="pagination-item"
+          style={{ cursor: "none", color: "#000" }}
+        >
+          {currentPage}
+        </p>
+        <p
+          className="pagination-item"
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </p>
+      </div>
     </>
   );
 }
