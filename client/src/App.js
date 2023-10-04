@@ -5,7 +5,6 @@ import VendorForm from "./components/VendorForm";
 import VendorList from "./components/VendorList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import VendorEdit from "./components/VendorEdit";
-import { Provider } from "react-redux";
 function App() {
   return (
     <BrowserRouter>

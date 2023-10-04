@@ -20,7 +20,7 @@ function VendorEdit() {
 
   useEffect(() => {
     getDetails();
-  }, []);
+  }, [getDetails]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
