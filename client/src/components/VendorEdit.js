@@ -10,7 +10,9 @@ function VendorEdit() {
   const [data, setData] = useState();
 
   const getDetails = async () => {
-    let result = await fetch(`http://localhost:5000/details/${params.id}`);
+    let result = await fetch(
+      `https://vendor-management-huht.onrender.com/details/${params.id}`
+    );
     result = await result.json();
     // console.log("result", result);
     setData(result);
@@ -34,22 +36,25 @@ function VendorEdit() {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    let result = await fetch(`http://localhost:5000/update/${params.id}`, {
-      method: "Put",
-      body: JSON.stringify({
-        name: data.name,
-        accountNo: data.accountNo,
-        bankName: data.bankName,
-        address1: data.address1,
-        address2: data.address2,
-        city: data.city,
-        country: data.country,
-        zipCode: data.zipCode,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    let result = await fetch(
+      `https://vendor-management-huht.onrender.com/update/${params.id}`,
+      {
+        method: "Put",
+        body: JSON.stringify({
+          name: data.name,
+          accountNo: data.accountNo,
+          bankName: data.bankName,
+          address1: data.address1,
+          address2: data.address2,
+          city: data.city,
+          country: data.country,
+          zipCode: data.zipCode,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     result = await result.json();
     console.log("Result", result);
     if (result.acknowledged === true) {

@@ -15,7 +15,9 @@ function VendorList() {
   // console.log("userDetails", userDetails);
 
   const getDetails = async () => {
-    const fetchData = await fetch("http://localhost:5000/details");
+    const fetchData = await fetch(
+      "https://vendor-management-huht.onrender.com/details"
+    );
     let result = await fetchData.json();
     console.log("allData", result);
     setUserDetails(result.length > 0 ? result : "");
@@ -32,9 +34,12 @@ function VendorList() {
 
   const handleDelete = async (id) => {
     // console.log("Delete", id);
-    let deleteData = await fetch(`http://localhost:5000/delete/${id}`, {
-      method: "Delete",
-    });
+    let deleteData = await fetch(
+      `https://vendor-management-huht.onrender.com/delete/${id}`,
+      {
+        method: "Delete",
+      }
+    );
 
     deleteData = await deleteData.json();
     // console.log("deleteData", deleteData);

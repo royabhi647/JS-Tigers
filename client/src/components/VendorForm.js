@@ -35,13 +35,16 @@ function VendorForm() {
     if (data.name !== "" && data.accountNo !== "" && data.bankName !== "") {
       // console.log(data);
 
-      const fetchData = await fetch("http://localhost:5000/upload", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const fetchData = await fetch(
+        "https://vendor-management-huht.onrender.com/upload",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       setData({
         name: "",
