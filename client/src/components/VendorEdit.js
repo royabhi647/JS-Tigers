@@ -9,18 +9,18 @@ function VendorEdit() {
   const navigate = useNavigate();
   const [data, setData] = useState();
 
-  const getDetails = async () => {
-    let result = await fetch(
-      `https://vendor-management-huht.onrender.com/details/${params.id}`
-    );
-    result = await result.json();
-    // console.log("result", result);
-    setData(result);
-  };
-
   useEffect(() => {
+    const getDetails = async () => {
+      let result = await fetch(
+        `https://vendor-management-huht.onrender.com/details/${params.id}`
+      );
+      result = await result.json();
+      // console.log("result", result);
+      setData(result);
+    };
+
     getDetails();
-  }, []);
+  }, [params.id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
