@@ -9,10 +9,6 @@ function VendorEdit() {
   const navigate = useNavigate();
   const [data, setData] = useState();
 
-  useEffect(() => {
-    getDetails();
-  }, []);
-
   const getDetails = async () => {
     let result = await fetch(
       `https://vendor-management-c26x.onrender.com/details/${params.id}`
@@ -21,6 +17,8 @@ function VendorEdit() {
     // console.log("result", result);
     setData(result);
   };
+
+  getDetails();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
