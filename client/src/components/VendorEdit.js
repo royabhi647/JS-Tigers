@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import "./styles.css";
@@ -9,9 +9,9 @@ function VendorEdit() {
   const navigate = useNavigate();
   const [data, setData] = useState();
 
-  // useEffect(() => {
-  //   getDetails();
-  // }, []);
+  useEffect(() => {
+    getDetails();
+  }, []);
 
   const getDetails = async () => {
     let result = await fetch(`http://localhost:5000/details/${params.id}`);
@@ -19,8 +19,6 @@ function VendorEdit() {
     // console.log("result", result);
     setData(result);
   };
-
-  getDetails();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
